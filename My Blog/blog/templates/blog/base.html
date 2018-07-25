@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Blog</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- medium style github yawbe -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/newfile.css' %}">
+
+    <!-- FOnts -->
+    <link href="https://fonts.googleapis.com/css?family=Headland+One|Questrial|Cinzel" rel="stylesheet">
+
+
+  </head>
+    <body>
+      <!--Navbar  -->
+
+        <nav class="navbar navbar-default techfont">
+            <div class="container-fluid">
+
+
+
+          <ul class="nav navbar-nav">
+            <li>
+              <strong><a class='navbar-brand brandtext' style="margin-top:10px;" href="{% url 'post_list' %}">My Tech blog</a></strong>
+          </li>
+            <li style="margin-top:10px;"><a href="{% url 'about'%}">About</a></li>
+              <li style="margin-top:15px; margin-right:20px;"><span> <a href="https://www.github.com"><img class='thumbnail' src="{% static '2.jpg' %}" height="40px" width="40px" alt=""> </a></span></li>
+              <li style="margin-top:15px;"><span><a href="https://www.linkedin.com"><img class='thumbnail' src="{% static '1.jpg' %}" height="40px" width="40px" alt=""></a></span></li>
+
+
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right" >
+            {% if user.is_authenticated %}
+            <li style="margin-top:10px;">
+            <a href="{% url 'post_new' %}" >New Post</a>
+            </li>
+
+            <li style="margin-top:10px;">
+              <a href="{% url 'post_draft_list' %}">Drafts</a>
+            </li>
+            <li style="margin-top:10px;">
+              <a href="{% url 'logout' %}" >Log out</a>
+            </li>
+
+            <li style="margin-top:10px; margin-right:30px;" >
+              <a >Welcome: {{ user.username }}</a>
+            </li>
+            {% else %}
+            <li style="margin-right:30px; margin-top:10px;" ><a href="{% url 'login' %}" style="float:right" ><span class="glyphicon glyphicon-user"></span></a></li>
+            {% endif %}
+
+          </ul>
+</div>
+        </nav>
+<br>
+
+      <div class="content container">
+        <div class="row">
+            <div class="col-lg-12">
+                {% block body_block %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+
+</body>
+</html>
